@@ -2,6 +2,7 @@ DCN-2 Project: Flask-Based Real-Time Chat Application
 
 University Submission
 
+
 Course: Data Communication & Networking – II (DCN-2)
 
 Project Type: Semester Project
@@ -130,19 +131,31 @@ All communication occurs over HTTP, aligning with DCN-2 protocol concepts.
 Chat_Web_App-main
 
 │
+
 ├── myapp
+
 │   ├── static
+
 │   │   ├── auth.css
+
 │   │   └── chat.css
+
 │   ├── templates
+
 │   ├── config.py
+
 │   └── database.py
+
 │
 ├── instance
+
 │   └── database.db
+
 │
 ├── gunicorn_config.py
+
 ├── .env
+
 └── run.py
 
 
@@ -223,6 +236,7 @@ http://127.0.0.1:5000/
 
 This project is developed strictly for academic purposes as part of the DCN-2 course.
 All work submitted is original and complies with university academic integrity policies.
+
 
 
 
