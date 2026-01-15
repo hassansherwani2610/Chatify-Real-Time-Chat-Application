@@ -1,11 +1,17 @@
 DCN-2 Project: Flask-Based Real-Time Chat Application
+
 University Submission
 
 Course: Data Communication & Networking – II (DCN-2)
+
 Project Type: Semester Project
+
 Backend Framework: Flask (Python)
+
 Frontend: HTML, CSS, JavaScript
+
 Database: SQLite
+
 
 Students:
 
@@ -29,6 +35,7 @@ The project demonstrates the practical implementation of client–server communi
 
 Authenticated users can communicate through a web interface while applying fundamental networking concepts taught in DCN-2.
 
+
 🎯 Objectives
 
 ✔ To implement a client–server communication model using Flask
@@ -40,6 +47,7 @@ Authenticated users can communicate through a web interface while applying funda
 ✔ To manage user sessions and authentication
 
 ✔ To design a modular and structured Flask application
+
 
 ⭐ Key Features
 
@@ -54,6 +62,7 @@ Authenticated users can communicate through a web interface while applying funda
 📱 Clean and Responsive User Interface
 
 🧩 Modular Flask Application Structure
+
 
 🛠 Technologies Used
 
@@ -101,6 +110,7 @@ The application follows a client–server architecture:
 
 All communication occurs over HTTP, aligning with DCN-2 protocol concepts.
 
+
 📡 DCN-2 Concepts Applied
 
 📌 Client–Server Architecture
@@ -115,38 +125,26 @@ All communication occurs over HTTP, aligning with DCN-2 protocol concepts.
 
 📌 Network-Based Application Design
 
+
 📂 Project Structure
 Chat_Web_App-main
 
 │
-
 ├── myapp
-
 │   ├── static
-
 │   │   ├── auth.css
-
 │   │   └── chat.css
-
 │   ├── templates
-
 │   ├── config.py
-
 │   └── database.py
-
 │
-
 ├── instance
-
 │   └── database.db
-
 │
-
 ├── gunicorn_config.py
-
 ├── .env
-
 └── run.py
+
 
 ⚙ Installation & Setup
 
@@ -157,6 +155,7 @@ Python 3.9 or above
 pip (Python Package Manager)
 
 Git
+
 
 🚀 Setup Instructions
 
@@ -177,6 +176,7 @@ python run.py
 
 http://127.0.0.1:5000/
 
+
 📖 Usage Instructions
 
 1️⃣ Open the application in a web browser
@@ -189,6 +189,7 @@ http://127.0.0.1:5000/
 
 5️⃣ Messages are securely stored in the database
 
+
 🧪 Testing
 
 ✔ Manual testing through web browser
@@ -197,6 +198,7 @@ http://127.0.0.1:5000/
 
 ✔ Database operations tested successfully
 
+
 ⚠ Limitations
 
 ❌ No group chat functionality
@@ -204,6 +206,7 @@ http://127.0.0.1:5000/
 ❌ No message encryption
 
 ❌ Basic UI styling
+
 
 🚀 Future Enhancements
 
@@ -215,10 +218,12 @@ http://127.0.0.1:5000/
 
 ☁ Deployment on Cloud Platform
 
+
 📜 Academic Declaration
 
 This project is developed strictly for academic purposes as part of the DCN-2 course.
 All work submitted is original and complies with university academic integrity policies.
+
 
 
 
