@@ -1,21 +1,21 @@
-💬 DCN-2 Project: Flask-Based Real-Time Chat Application
-🎓 University Submission
+DCN-2 Project: Flask-Based Real-Time Chat Application
+University Submission
 
-📘 Course: Data Communication & Networking – II (DCN-2)
-🧪 Project Type: Semester Project
-🖥 Backend Framework: Flask (Python)
-🎨 Frontend: HTML, CSS, JavaScript
-🗄 Database: SQLite
+Course: Data Communication & Networking – II (DCN-2)
+Project Type: Semester Project
+Backend Framework: Flask (Python)
+Frontend: HTML, CSS, JavaScript
+Database: SQLite
 
-👨‍🎓 Students:
+Students:
 
-Hassan Sherwani [B22110006055]
+Hassan Sherwani (B22110006055)
 
-Muhammad Junaid [B22110006098]
+Muhammad Junaid (B22110006098)
 
-Syed Shabih Haider Naqvi [B22110006164]
+Syed Shabih Haider Naqvi (B22110006164)
 
-Abdur Rahman Siddiqui [B22110006006]
+Abdur Rahman Siddiqui (B22110006006)
 
 📤 Submission Platform: GitHub
 
@@ -163,3 +163,4 @@ http://127.0.0.1:5000/
 
 This project is developed strictly for academic purposes as part of the DCN-2 course.
 All work submitted is original and complies with university academic integrity policies.
+
