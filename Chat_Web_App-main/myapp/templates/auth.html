@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Auth - Dark Mode</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/auth.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="main-bg-wrapper">
+    <div class="glass-card fade-in">
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-container">
+                    {% for message in messages %}
+                        <div class="flash-msg">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="login-snip">
+            <input id="tab-1" type="radio" name="tab" class="sign-in-radio" checked>
+            <label for="tab-1" class="tab-label">Login</label>
+            
+            <input id="tab-2" type="radio" name="tab" class="sign-up-radio">
+            <label for="tab-2" class="tab-label">Sign Up</label>
+            
+            <div class="form-slider">
+                <div class="login-section">
+                    <form method="POST">
+                        <div class="input-group-custom">
+                            <label class="field-label">Email Address</label>
+                            <input name="email" type="email" class="dark-input" placeholder="name@example.com" required>
+                        </div>
+                        <div class="input-group-custom">
+                            <label class="field-label">Password</label>
+                            <input name="password" type="password" class="dark-input" placeholder="••••••••" required>
+                        </div>
+                        <div class="options-row">
+                            <label class="checkbox-container">
+                                <input class="checkmark" type="checkbox" checked>
+                                Keep me signed in
+                            </label>
+                        </div>
+                        <button type="submit" class="glow-button">Sign In</button>
+                        <div class="divider"></div>
+                        <div class="footer-link">
+                            <a href="#">Forgot Password?</a>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="signup-section">
+                    <form method="POST" action="{{ url_for('views.register') }}">
+                        <div class="input-group-custom">
+                            <label class="field-label">Username</label>
+                            <input name="username" type="text" class="dark-input" placeholder="Choose username" required>
+                        </div>
+                        <div class="input-group-custom">
+                            <label class="field-label">Email Address</label>
+                            <input name="email" type="email" class="dark-input" placeholder="email@domain.com" required>
+                        </div>
+                        <div class="input-group-custom">
+                            <label class="field-label">Password</label>
+                            <input name="password" type="password" class="dark-input" placeholder="Create password" required>
+                        </div>
+                        <button type="submit" class="glow-button">Create Account</button>
+                        <div class="divider">
+                            <div class="footer-link"><label for="tab-1">Already a member? <span>Login</span></label>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

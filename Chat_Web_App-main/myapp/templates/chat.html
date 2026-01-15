@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Window</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="/static/chat.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
+</head>
+<body class="main-bg-wrapper">
+
+  <div class="container">
+    <div class="container-header">
+      <h3 class="text-left"> {{ user_data["username"] }} <span class="online-circle">🟢</span></h3>
+      <h3 class="text-center">iChat</h3>
+      <h3 class="text-right">{{ user_data["email"] }}</h3>
+    </div>
+
+    <div class="messaging">
+      <div class="inbox_msg">
+        <div class="inbox_people">
+          <div class="headind_srch">
+            <div class="recent_heading">
+              <h4>Recent</h4>
+            </div>
+            <div class="srch_bar">
+              <div class="stylish-input-group">
+                <input type="text" class="search-bar" placeholder="Search">
+                <span class="input-group-addon">
+                  <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                </span>
+              </div>
+            </div>
+            <div class="new_chat">
+              <div id="new_chat_overlay"></div>
+              <button id="new_chat_btn"><i class="fa fa-plus"></i> New Chat</button>
+              <form method="POST" action="{{ url_for('views.new_chat') }}" id="new_chat_form">
+                <label for="email"><strong>Email: </strong></label>
+                <input type="email" name="email" placeholder="enter friend's email here...">
+                <input type="submit" value="Submit">
+              </form>
+            </div>
+          </div>
+
+          <div class="inbox_chat">
+            {% for i in data %}
+            <a href="{{ url_for('views.chat', rid=i.room_id) }}">
+              <div class="chat_list" id="{{ i.room_id }}">
+                <div class="chat_people">
+                  <div class="chat_img"> 
+                    <img style="width: 50px;height: 50px;" src="https://ptetutorials.com/images/user-profile.png" alt="profile"> 
+                  </div>
+                  <div class="chat_ib">
+                    <h5>
+                      {{ i["username"] }}
+                      <span class="status" data-user="{{ i['username'] }}">Loading...</span>
+                    </h5>
+                    <p id="last-message">{{ i["last_message"] }}</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="mesgs">
+          <div class="msg_history">
+            {% for j in messages %}
+              {% if j.sender_username == user_data["username"] %}
+              <div class="outgoing_msg" id="{{ j.timestamp }}">
+                <div class="sent_msg">
+                  <p>{{ j.content }}</p>
+                  <span class="time_date">{{ j.timestamp | ftime }}</span>
+                </div>
+              </div>
+              {% else %}
+              <div class="incoming_msg" id="{{ j.timestamp }}">
+                <div class="incoming_msg_img"> 
+                </div>
+                <div class="received_msg">
+                  <div class="received_withd_msg">
+                    <p>{{ j.content }}</p>
+                    <span class="time_date">{{ j.timestamp | ftime }}</span>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+
+          <div class="type_msg">
+            <div class="input_msg_write">
+              <form id="chat_form">
+                <input type="text" class="message" placeholder="Type your message..." autocomplete="off"/>
+                <button class="msg_send_btn" type="submit">
+                  <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
+
+  <script>
+    // ==============================================
+    //              SOCKET.IO + STATUS
+    // ==============================================
+
+    const socket = io();
+
+    // Register ourselves when connected
+    socket.on('connect', () => {
+      socket.emit('register', {
+        username: "{{ user_data['username'] }}"
+      });
+
+      // Also join the current chat room
+      socket.emit('join-chat', {
+        rid: '{{ room_id }}'
+      });
+    });
+
+    // Status updates from server
+    socket.on('user_status', (data) => {
+      const statusElement = document.querySelector(`[data-user="${data.username}"]`);
+      if (!statusElement) return;
+
+      if (data.online) {
+        statusElement.textContent = 'Online';
+        statusElement.style.color = '#28a745';
+        statusElement.style.fontWeight = '600';
+      } else {
+        const time = data.last_seen 
+          ? new Date(data.last_seen).toLocaleString('en-US', {hour: 'numeric', minute: '2-digit', hour12: true})
+          : 'never';
+        statusElement.textContent = `Last seen ${time}`;
+        statusElement.style.color = '#6c757d';
+      }
+    });
+
+    // ==============================================
+    //               YOUR ORIGINAL CHAT LOGIC
+    // ==============================================
+
+    let $container = $(document.scrollingElement || document.body);
+    let msgH = document.querySelectorAll(".msg_history > div");
+    let CurrentLen;
+
+    let init = () => {
+      CurrentLen = msgH.length;
+    };
+    init();
+
+    let validatePosition = () => {
+      if (msgH.length === CurrentLen) {
+        msgH[msgH.length - 1].setAttribute("id", "last_message");
+        for (let i = 0; i < msgH.length; i++) {
+          if (msgH[i].id === "last_message" && i !== msgH.length - 1) {
+            msgH[i].removeAttribute("id");
+            msgH[msgH.length - 1].setAttribute("id", "last_message");
+          }
+        }
+      }
+    };
+
+    let scrollDown = () => {
+      validatePosition();
+      location.href = "#last_message";
+      init();
+    };
+
+    var form = $('#chat_form').on('submit', function (e) {
+      e.preventDefault();
+      let user_input = $('input.message').val().trim();
+
+      if (!user_input) return;
+
+      socket.emit('outgoing', {
+        timestamp: parseInt(Date.now()/1000),
+        sender_username: "{{ user_data['username'] }}",
+        sender_id: {{ user_data["id"] }},
+        message: user_input,
+        rid: '{{ room_id }}'
+      });
+
+      $('div.msg_history').append(`
+        <div class="outgoing_msg">
+          <div class="sent_msg">
+            <p>${user_input}</p>
+            <span class="time_date"> ${formatDate(new Date())}</span>
+          </div>
+        </div>
+      `);
+
+      $('input.message').val('').focus();
+      scrollDown();
+    });
+
+    socket.on('message', function (msg) {
+      $('div.msg_history').append(`
+        <div class="incoming_msg">
+          <div class="incoming_msg_img">
+            <img src="https://ptetutorials.com/images/user-profile.png" alt="profile">
+          </div>
+          <div class="received_msg">
+            <div class="received_withd_msg">
+              <p>${msg.message}</p>
+              <span class="time_date"> ${formatDate(new Date())}</span>
+            </div>
+          </div>
+        </div>
+      `);
+      scrollDown();
+    });
+
+    function formatDate(date) {
+      const hours = date.getHours();
+      const formattedHours = (hours % 12) || 12;
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+      return `${formattedHours}:${minutes} ${ampm} | ${month}/${day}`;
+    }
+
+    // New chat form toggle
+    window.onload = function () {
+      const newChatBtn = document.querySelector('#new_chat_btn');
+      const newChatForm = document.querySelector('#new_chat_form');
+      const newChatOverlay = document.querySelector('#new_chat_overlay');
+
+      newChatBtn.onclick = () => {
+        newChatForm.style.display = "block";
+        newChatOverlay.style.display = 'block';
+      };
+
+      newChatOverlay.onclick = (e) => {
+        if (e.target === newChatOverlay) {
+          newChatForm.style.display = "none";
+          newChatOverlay.style.display = 'none';
+        }
+      };
+    };
+  </script>
+</body>
+</html>

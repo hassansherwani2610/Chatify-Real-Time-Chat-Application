@@ -1,0 +1,334 @@
+/* chat.css (modified) */
+/* --- GLOBAL STYLES --- */
+.container {
+  max-width: 1170px;
+  margin: auto;
+}
+
+html,body{
+  width: 100%;
+  height: 100%;  
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* --- HEADER SECTION --- */
+.container-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #ffffff; /* White text for contrast */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  padding: 10px 0;
+}
+
+/* --- BACKGROUND HANDLER --- */
+.main-bg-wrapper {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Use your uploaded image path here */
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
+              url('/static/images/background-image.jpg'); 
+  background-size: cover;
+  background-position: center;
+}
+
+/* --- MAIN CHAT WINDOW (Glass Effect) --- */
+.messaging {
+  padding: 0 0 50px 0;
+  width: 100%;
+}
+
+.inbox_msg {
+  clear: both;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.25); /* Dark transparency */
+  backdrop-filter: blur(15px); /* Blurs the wall texture for text legibility */
+  border-radius: 12px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+}
+
+/* --- LEFT SIDEBAR (Inbox/People) --- */
+.inbox_people {
+  background: rgba(255, 255, 255, 0.03);
+  float: left;
+  overflow: hidden;
+  width: 40%;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.headind_srch {
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 15px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.recent_heading h4 {
+  color: #00d4ff; /* Vibrant cyan to match the highlight in your SS */
+  font-size: 21px;
+  margin: auto;
+  font-weight: 700;
+}
+
+.srch_bar {
+  display: inline-block;
+  text-align: right;
+  width: 40%;
+}
+
+.srch_bar input {
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  width: 85%;
+  padding: 2px 0 4px 6px;
+  background: none;
+  color: #fff;
+}
+
+.chat_img {
+
+  float: left;
+
+  width: 11%;
+
+}
+
+.srch_bar input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.srch_bar .input-group-addon button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: #00d4ff;
+  font-size: 18px;
+}
+
+/* --- NEW CHAT STYLES --- */
+.new_chat {
+  width: 30%;
+  z-index: 100;
+}
+
+#new_chat_btn {
+  outline: none;
+  background: rgba(0, 212, 255, 0.1);
+  color: #fff;
+  border: 1px solid #00d4ff;
+  width: 90%;
+  margin-left: 10%;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+#new_chat_btn:hover {
+  background: #00d4ff;
+}
+
+.headind_srch>.new_chat form {
+  background: #1a1a1a;
+  margin-top: 10px;
+  display: none;
+  padding: 15px;
+  border: 1px solid #00d4ff;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 500;
+  color: #fff;
+}
+
+/* --- CONTACT LIST --- */
+.chat_list...(truncated 224 characters)...gba(0, 212, 255, 0.15);
+}
+
+.chat_people{
+  display: flex;
+  gap: 10px;
+}
+
+.chat_ib h5 {
+  font-size: 15px;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+}
+
+.chat_ib p {
+  font-size: 14px;
+  color: #b0b0b0; /* Gray for message preview */
+  margin: auto;
+}
+
+.inbox_chat {
+  height: 550px;
+  overflow-y: scroll;
+}
+
+/* --- RIGHT SIDE (Messages) --- */
+.mesgs {
+  float: left;
+  padding: 30px 15px 0 25px;
+  width: 60%;
+  background: transparent; /* Transparent to let the wall texture show */
+}
+
+.msg_history {
+  height: 516px;
+  overflow-y: auto;
+}
+
+/* Incoming Messages */
+.received_withd_msg p {
+  background: rgba(255, 255, 255, 0.1); /* Frosted white bubble */
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 14px;
+  margin: 0;
+  padding: 8px 12px;
+  width: 70%;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.time_date {
+  color: #8899a6;
+  display: block;
+  font-size: 11px;
+  margin: 8px 0 0;
+}
+
+/* Outgoing Messages */
+.sent_msg p {
+  background: #005f73; /* Deep teal to match the dark wall */
+  border-radius: 12px;
+  font-size: 14px;
+  margin: 0;
+  color: #fff;
+  padding: 8px 12px;
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.outgoing_msg {
+  overflow: hidden;
+  margin: 26px 0 26px;
+}
+
+.sent_msg {
+  float: right;
+  width: 46%;
+}
+
+/* --- MESSAGE INPUT AREA --- */
+.type_msg {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.input_msg_write input {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 15px;
+  min-height: 48px;
+  width: 100%;
+  padding-left: 10px;
+}
+
+.input_msg_write input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.msg_send_btn {
+  background: #00d4ff;
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 17px;
+  height: 33px;
+  position: absolute;
+  right: 5px;
+  top: 8px;
+  width: 33px;
+  transition: 0.2s;
+}
+
+.msg_send_btn:hover {
+  transform: scale(1.1);
+  background: #008eb0;
+}
+
+/* --- FOOTER --- */
+.top_spac {
+  margin: 20px 0 0;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.top_spac a {
+  color: #00d4ff;
+}
+
+.inbox_chat::-webkit-scrollbar {
+  width: 7px;
+}
+
+.inbox_chat::-webkit-scrollbar-track {
+  background: rgba(0, 40, 50, 0.55); /* deep teal shadowed track */
+  border-radius: 12px;
+}
+
+.inbox_chat::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 180, 200, 0.9),
+    rgba(0, 120, 140, 0.9)
+  ); /* matches rough teal highlights */
+  border-radius: 12px;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.6);
+}
+
+.inbox_chat::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 220, 255, 1),
+    rgba(0, 160, 190, 1)
+  );
+}
+
+/* Firefox support */
+.inbox_chat {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 190, 220, 0.9) rgba(0, 40, 50, 0.6);
+}
+
+.online-circle {
+  font-size: 10px;
+  vertical-align: middle;
+}
+
+/* NEW: Online/Offline Styles */
+.status {
+    font-size: 0.8em;
+    margin-left: 8px;
+}
+
+.status.online {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.status.offline {
+    color: #6c757d;
+}
