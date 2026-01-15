@@ -30,6 +30,7 @@ Authenticated users can communicate through a web interface while applying funda
 🎯 Objectives
 
 ✔ To implement a client–server communication model using Flask
+
 ✔ To understand HTTP request and response flow
 ✔ To apply DCN-2 networking concepts in a real-world web application
 ✔ To manage user sessions and authentication
@@ -163,4 +164,5 @@ http://127.0.0.1:5000/
 
 This project is developed strictly for academic purposes as part of the DCN-2 course.
 All work submitted is original and complies with university academic integrity policies.
+
 
